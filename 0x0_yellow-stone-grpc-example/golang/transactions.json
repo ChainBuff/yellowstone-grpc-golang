@@ -1,0 +1,11 @@
+{
+  "transactions": {
+    "tx_sub": {
+      "accountInclude": [
+        "696969Y6orZEjp4gZtwcCZS7TNVuhMVE6G5mFvdJ4mYq"
+      ],
+      "vote": false,
+      "failed": true
+    }
+  }
+}
