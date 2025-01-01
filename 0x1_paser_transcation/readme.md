@@ -106,3 +106,5 @@ root@kvm12191 ~/buff/yellowstone-grpc-golang/0x1_paser_transcation/golang # go r
 ```
 
 其中有 `Program log: Instruction: Sell` 和 `Program log: Instruction: Buy` 那么我们就可以通过字符串匹配出我们想要的数据。
+
+而如果要解析详细的数据，则可以通过反序列化 `Program data` 来解析出详细的数据。

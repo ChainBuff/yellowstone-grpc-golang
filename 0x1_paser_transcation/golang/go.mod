@@ -3,6 +3,7 @@ module github.com/rpcpool/yellowstone-grpc/examples/golang
 go 1.21
 
 require (
+	github.com/mr-tron/base58 v1.2.0
 	google.golang.org/grpc v1.67.1
 	google.golang.org/protobuf v1.35.1
 )

@@ -3,15 +3,18 @@ package main
 import (
 	"context"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/json"
 	"flag"
 	"io"
 	"log"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	// 导入 protobuf 生成的 gRPC 代码
+	"github.com/mr-tron/base58"
 	pb "github.com/rpcpool/yellowstone-grpc/examples/golang/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -265,7 +268,7 @@ func grpc_subscribe(conn *grpc.ClientConn) {
 
 		// 接收更新
 		resp, err := stream.Recv()
-		timestamp := time.Now().UnixNano()
+		//timestamp := time.Now().UnixNano()
 
 		if err == io.EOF {
 			return
@@ -274,8 +277,64 @@ func grpc_subscribe(conn *grpc.ClientConn) {
 			log.Fatalf("接收更新时发生错误: %v", err)
 		}
 		if resp.GetTransaction() != nil {
-			for _, logMessage := range resp.GetTransaction().GetTransaction().Meta.GetLogMessages() {
-				log.Printf("%v %v", timestamp, logMessage)
+			tx := resp.GetTransaction()
+			for _, logMessage := range tx.GetTransaction().Meta.GetLogMessages() {
+				// 只处理买入指令
+				if strings.Contains(logMessage, "Program log: Instruction: Buy") {
+					// 查找并解析Program data
+					for _, msg := range tx.GetTransaction().Meta.GetLogMessages() {
+						if strings.Contains(msg, "Program data: ") {
+							data := strings.Split(msg, "Program data: ")[1]
+							decoded, err := base64.StdEncoding.DecodeString(data)
+							if err != nil {
+								log.Printf("解码失败: %v", err)
+								continue
+							}
+
+							// 验证数据长度
+							if len(decoded) < 8+32+8+8+1+32+8 {
+								continue
+							}
+
+							offset := 8 // 跳过魔数和版本
+
+							// 解析Mint地址
+							var mintBytes [32]byte
+							copy(mintBytes[:], decoded[offset:offset+32])
+							mintAddress := base58.Encode(mintBytes[:])
+							offset += 32
+
+							// 跳过sol和token数量
+							offset += 16 // 8+8
+
+							// 跳过isBuy标志
+							offset += 1
+
+							// 解析用户地址
+							var userBytes [32]byte
+							copy(userBytes[:], decoded[offset:offset+32])
+							userAddress := base58.Encode(userBytes[:])
+							offset += 32
+
+							// 获取本地时间戳（毫秒）
+							milliseconds := time.Now().UnixMilli()
+							tradeTime := time.Now().Format("2006-01-02 15:04:05.000")
+
+							// 输出交易信息
+							log.Printf("\n===================== 买入交易 =====================\n"+
+								"用户地址: %s\n"+
+								"Mint地址: %s\n"+
+								"交易时间: %s\n"+
+								"时间戳(毫秒): %d\n"+
+								"================================================\n",
+								userAddress,
+								mintAddress,
+								tradeTime,
+								milliseconds,
+							)
+						}
+					}
+				}
 			}
 		}
 	}
