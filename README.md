@@ -4,9 +4,9 @@
 ## 使用说明
 使用之前你需要安装如下库
 ```
-	google.golang.org/grpc v1.67.1
-	google.golang.org/protobuf v1.35.1
-    github.com/rpcpool/yellowstone-grpc/examples/golang/proto
+google.golang.org/grpc v1.67.1  
+google.golang.org/protobuf v1.35.1  
+github.com/rpcpool/yellowstone-grpc/examples/golang/proto  
 ```
 ## 大纲
 
