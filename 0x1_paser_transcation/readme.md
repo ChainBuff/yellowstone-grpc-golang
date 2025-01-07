@@ -108,3 +108,55 @@ root@kvm12191 ~/buff/yellowstone-grpc-golang/0x1_paser_transcation/golang # go r
 其中有 `Program log: Instruction: Sell` 和 `Program log: Instruction: Buy` 那么我们就可以通过字符串匹配出我们想要的数据。
 
 而如果要解析详细的数据，则可以通过反序列化 `Program data` 来解析出详细的数据。
+解析的关键代码在
+```				
+							decoded, err := base64.StdEncoding.DecodeString(data)
+							if err != nil {
+								log.Printf("解码失败: %v", err)
+								continue
+							}
+
+							// 验证数据长度
+							if len(decoded) < 8+32+8+8+1+32+8 {
+								continue
+							}
+
+							offset := 8 // 跳过魔数和版本
+
+							// 解析Mint地址
+							var mintBytes [32]byte
+							copy(mintBytes[:], decoded[offset:offset+32])
+							mintAddress := base58.Encode(mintBytes[:])
+							offset += 32
+
+							// 跳过sol和token数量
+							offset += 16 // 8+8
+
+							// 跳过isBuy标志
+							offset += 1
+
+							// 解析用户地址
+							var userBytes [32]byte
+							copy(userBytes[:], decoded[offset:offset+32])
+							userAddress := base58.Encode(userBytes[:])
+							offset += 32
+
+							// 获取本地时间戳（毫秒）
+							milliseconds := time.Now().UnixMilli()
+							tradeTime := time.Now().Format("2006-01-02 15:04:05.000")
+
+							// 输出交易信息
+							log.Printf("\n===================== 买入交易 =====================\n"+
+								"用户地址: %s\n"+
+								"Mint地址: %s\n"+
+								"交易时间: %s\n"+
+								"时间戳(毫秒): %d\n"+
+								"================================================\n",
+								userAddress,
+								mintAddress,
+								tradeTime,
+								milliseconds,
+
+```
+实际上过程很简单：base64 解码数据 -> hex数据 -> 通过偏移量取出来数据
+
