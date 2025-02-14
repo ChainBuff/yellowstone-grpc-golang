@@ -28,7 +28,7 @@ Mint地址: 34wnEj7YTYvsi2AKg8P2Xe5kWawg98D3gM59fBwGpump
 数量: 0.001000
 
 已加载配置:
-Private Key: Yq3tjpzzx88kGjHzKvtThmnr62fg45An63pnejVvv6rS1Y89A9VGK2M1fqgvDeVXd8m498wzSkEoQR2REWf9MzP
+Private Key: 
 2025/02/14 14:24:25 开始执行买入交易...
 2025/02/14 14:24:25 Mint地址: 34wnEj7YTYvsi2AKg8P2Xe5kWawg98D3gM59fBwGpump
 2025/02/14 14:24:25 购买数量: 35432710885
@@ -55,7 +55,7 @@ Mint地址: 34wnEj7YTYvsi2AKg8P2Xe5kWawg98D3gM59fBwGpump
 数量: 35430.000000
 
 已加载配置:
-Private Key: Yq3tjpzzx88kGjHzKvtThmnr62fg45An63pnejVvv6rS1Y89A9VGK2M1fqgvDeVXd8m498wzSkEoQR2REWf9MzP
+Private Key: 
 2025/02/14 14:25:18 开始执行卖出交易...
 2025/02/14 14:25:18 Mint地址: 34wnEj7YTYvsi2AKg8P2Xe5kWawg98D3gM59fBwGpump
 2025/02/14 14:25:18 卖出数量: 35430000000
