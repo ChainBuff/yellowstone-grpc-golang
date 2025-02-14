@@ -1,0 +1,35 @@
+private_key: "" # 私钥
+http_rpc_url: "https://mainnet.chainbuff.com"  # 全局RPC URL
+skip_ata_check: true  # 全局参数：是否跳过ATA检查
+buy_slippage: 0.05   # 全局买入滑点  = 5%
+sell_slippage: 0.05  # 全局卖出滑点
+buy_priority_fee: 0.000005  # 全局买入优先级费用 约等于 5000 lamports
+sell_priority_fee: 0.000005 # 全局卖出优先级费用
+
+normal:
+  enable: false # 是否启用普通交易
+  buy_tip: 0.3 # 该配置不能进行改动 普通模式不生效
+  sell_tip: 0.2 # 该配置不能进行改动 普通模式不生效
+
+jito:
+  enable: false ## 是否启用 jito 交易
+  rpc_url: "https://frankfurt.mainnet.block-engine.jito.wtf/api/v1" ## jito  url
+  buy_tip: 0.0001 ## 交易手续费
+  sell_tip: 0.0001 ## 交易手续费
+
+nextblock:
+  enable: false ## 是否启用 nextblock 交易
+  buy_tip: 0.001 ## 交易手续费
+  sell_tip: 0.001 ## 交易手续费
+  rpc_url: "https://fra.nextblock.io/api/v2/submit" ## nextblock  url
+  api_keys:
+    - "xxx" #需要自己去官网申请key
+
+
+temporal:
+  enable: true  ## 是否启用 temporal 交易
+  buy_tip: 0.001 ## 交易手续费
+  sell_tip: 0.001 ## 交易手续费
+  rpc_url: "http://fra2.nozomi.temporal.xyz/" ## temporal  url
+  api_keys:
+    - "8ecf81ea-c846-451e-b840-ad9332e96834" # buff anti mev key 

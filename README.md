@@ -14,6 +14,7 @@ github.com/rpcpool/yellowstone-grpc/examples/golang/proto
 - [0x1_paser_transcation](./0x1_paser_transcation/readme.md) 解析交易数据
 - [0x2_benchmark](./0x2_benchmark/readme.md) 网络延迟测试
 - [0x3_keepalive](./0x3_keepalive/readme.md) 解决 keepalive 问题
+- [0x4_pumpfun_trade](./0x4_pumpfun_trade/readme.md) pumpfun 交易器
 
 欢迎提交 Issue 和 Pull Request 来完善项目。在提交代码前请确保：
 - 遵循现有代码风格（bushi）
