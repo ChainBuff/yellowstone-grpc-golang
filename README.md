@@ -16,6 +16,7 @@ github.com/rpcpool/yellowstone-grpc/examples/golang/proto
 - [0x3_keepalive](./0x3_keepalive/readme.md) 解决 keepalive 问题
 - [0x4_pumpfun_trade](./0x4_pumpfun_trade/readme.md) pumpfun 交易器
 - [0x5_burn_closedata](./0x5_burn_closedata/readme.md) 销毁代币并关闭账户
+- [0x6 pumpfun_trade_with_new_idl](./0x6_new_pumpfun_trade/Readme.md)
 
 欢迎提交 Issue 和 Pull Request 来完善项目。在提交代码前请确保：
 - 遵循现有代码风格（bushi）
